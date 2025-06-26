@@ -1,0 +1,175 @@
+{
+  "disclaimer": "本测试为自筛工具，评估人格特质倾向而非临床诊断。人格障碍诊断需由精神科医生通过结构化访谈、病史采集等专业流程完成。结果仅供自我了解参考，若感困扰请寻求专业帮助。",
+  "instructions": "请根据近半年情况，选择最符合的选项：1=非常不符合，2=不太符合，3=不确定，4=比较符合，5=非常符合",
+  "dimensions": {
+    "PPD": "偏执型特质",
+    "SzPD": "分裂样特质",
+    "ASPD": "反社会型特质",
+    "BPD": "边缘型特质",
+    "HPD": "表演型特质",
+    "NPD": "自恋型特质",
+    "AvPD": "回避型特质",
+    "DPD": "依赖型特质",
+    "OCPD": "强迫型特质",
+    "StPD": "分裂型特质"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "text": "我常觉得他人有隐藏动机或可能伤害我",
+      "dimension": "PPD",
+      "reverse_score": false
+    },
+    {
+      "id": 2,
+      "text": "当亲密关系变近时，我会突然感到强烈不安",
+      "dimension": "BPD",
+      "reverse_score": false
+    },
+    {
+      "id": 3,
+      "text": "规则和约束让我感到窒息，常想挑战它们",
+      "dimension": "ASPD",
+      "reverse_score": false
+    },
+    {
+      "id": 4,
+      "text": "在社交场合，我会主动成为焦点人物",
+      "dimension": "HPD",
+      "reverse_score": true
+    },
+    {
+      "id": 5,
+      "text": "我确信自己比多数人更特别且应受特殊对待",
+      "dimension": "NPD",
+      "reverse_score": false
+    },
+    {
+      "id": 6,
+      "text": "为避免批评，我会放弃重要机会",
+      "dimension": "AvPD",
+      "reverse_score": false
+    },
+    {
+      "id": 7,
+      "text": "独自做决定让我极度焦虑",
+      "dimension": "DPD",
+      "reverse_score": false
+    },
+    {
+      "id": 8,
+      "text": "工作需要完全按我的计划执行，否则会不安",
+      "dimension": "OCPD",
+      "reverse_score": false
+    },
+    {
+      "id": 9,
+      "text": "独处让我感到舒适自在",
+      "dimension": "SzPD",
+      "reverse_score": true
+    },
+    {
+      "id": 10,
+      "text": "我相信巧合事件有特殊含义",
+      "dimension": "StPD",
+      "reverse_score": false
+    },
+    {
+      "id": 11,
+      "text": "情绪常在极端愤怒和愧疚间剧烈波动",
+      "dimension": "BPD",
+      "reverse_score": false
+    },
+    {
+      "id": 12,
+      "text": "伤害他人后很少感到懊悔",
+      "dimension": "ASPD",
+      "reverse_score": true
+    },
+    {
+      "id": 13,
+      "text": "常通过夸张言行吸引他人注意",
+      "dimension": "HPD",
+      "reverse_score": false
+    },
+    {
+      "id": 14,
+      "text": "我常幻想自己拥有无限权力或成就",
+      "dimension": "NPD",
+      "reverse_score": false
+    },
+    {
+      "id": 15,
+      "text": "害怕被拒而回避亲密关系",
+      "dimension": "AvPD",
+      "reverse_score": false
+    },
+    {
+      "id": 16,
+      "text": "会忍受不健康关系以避免孤独",
+      "dimension": "DPD",
+      "reverse_score": false
+    },
+    {
+      "id": 17,
+      "text": "因追求完美常无法按时完成任务",
+      "dimension": "OCPD",
+      "reverse_score": false
+    },
+    {
+      "id": 18,
+      "text": "对他人评价过度警觉",
+      "dimension": "PPD",
+      "reverse_score": false
+    },
+    {
+      "id": 19,
+      "text": "情感表达有限，即使与亲友相处",
+      "dimension": "SzPD",
+      "reverse_score": false
+    },
+    {
+      "id": 20,
+      "text": "有不同寻常的感知体验（如觉得被注视）",
+      "dimension": "StPD",
+      "reverse_score": false
+    }
+  ],
+  "scoring": {
+    "method": "维度均分",
+    "ranges": [
+      {
+        "min": 1.0,
+        "max": 2.4,
+        "interpretation": "该特质不明显"
+      },
+      {
+        "min": 2.5,
+        "max": 3.4,
+        "interpretation": "存在中等程度特质"
+      },
+      {
+        "min": 3.5,
+        "max": 4.4,
+        "interpretation": "特质表现显著，建议关注相关领域功能"
+      },
+      {
+        "min": 4.5,
+        "max": 5.0,
+        "interpretation": "特质非常突出，若造成困扰请咨询专业人士"
+      }
+    ],
+    "reverse_scoring_note": "标注reverse_score:true的题目需反向计分（1→5, 2→4等）"
+  },
+  "clinical_notes": [
+    "BPD特征：身份混乱/情感不稳定/被弃恐惧（需5项以上）",
+    "ASPD特征：漠视法律/欺诈/冲动/攻击性（18岁后持续表现）",
+    "OCPD特征：秩序感/完美主义/固执（影响社会功能）",
+    "筛查阳性标准：≥3个维度均分>3.5且持续>2年"
+  ],
+  "resources": [
+    "国际人格障碍学会：www.isspd.org",
+    "心理危机干预热线：xxx-xxxx-xxxx",
+    "《精神障碍诊断与统计手册（DSM-5）》"
+  ]
+}

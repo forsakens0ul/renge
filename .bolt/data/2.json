@@ -1,0 +1,221 @@
+{
+  "metadata": {
+    "version": "2.0",
+    "last_updated": "2023-07-20",
+    "reference": "DSM-5-TR (2022), ICD-11 (2023)"
+  },
+  "disclaimer": {
+    "title": "重要说明",
+    "content": [
+      "本工具评估人格特质连续谱系，非二元化诊断。临床诊断需满足：①症状持续≥2年 ②多个领域功能损害 ③排除物质/躯体疾病影响",
+      "结果受当前情绪状态、社会赞许性偏差等因素影响，建议在平静状态下完成",
+      "18岁以下人群不适用本测试"
+    ]
+  },
+  "instructions": {
+    "duration": "约15-20分钟",
+    "scale_definition": {
+      "1": "从未或极少发生（<5%）",
+      "2": "偶尔发生（约25%）",
+      "3": "有时发生（约50%）",
+      "4": "经常发生（约75%）",
+      "5": "几乎总是（>95%）"
+    },
+    "response_requirement": "所有题目必须作答，选择最接近实际行为的选项"
+  },
+  "dimensions": [
+    {
+      "code": "PPD",
+      "name": "偏执型特质",
+      "core_features": ["普遍不信任", "过度警惕", "敌意归因"],
+      "clinical_threshold": 3.8,
+      "questions": [
+        {"id": 1, "text": "我常需要反复确认他人言行是否隐藏恶意", "reverse": false},
+        {"id": 2, "text": "同事的玩笑话常让我觉得是变相羞辱", "reverse": false},
+        {"id": 3, "text": "即使没有证据，我也怀疑伴侣可能不忠", "reverse": false},
+        {"id": 4, "text": "我认为大多数人的友善都是另有所图", "reverse": false},
+        {"id": 5, "text": "法律文件必须逐字检查以防被欺骗", "reverse": false},
+        {"id": 6, "text": "他人突然的关心会让我警惕其真实目的", "reverse": false},
+        {"id": 7, "text": "我记下他人冒犯我的细节以备后用", "reverse": false},
+        {"id": 8, "text": "在团体中我总担心被排挤或陷害", "reverse": false}
+      ]
+    },
+    {
+      "code": "BPD",
+      "name": "边缘型特质",
+      "core_features": ["情感不稳定", "身份混乱", "被弃恐惧"],
+      "clinical_threshold": 4.0,
+      "questions": [
+        {"id": 9, "text": "我对同一个人会突然从极度喜爱变为厌恶", "reverse": false},
+        {"id": 10, "text": "当感到被忽略时，我会做出激烈反应（如自伤/威胁）", "reverse": false},
+        {"id": 11, "text": "我常不清楚自己究竟是怎样的人", "reverse": false},
+        {"id": 12, "text": "为避免真实/想象的被抛弃，我会乞求或控制对方", "reverse": false},
+        {"id": 13, "text": "情绪常在几小时内从极度亢奋变为深度抑郁", "reverse": false},
+        {"id": 14, "text": "我常有冲动行为（如酗酒/暴食/ reckless driving）", "reverse": false},
+        {"id": 15, "text": "空虚感强烈到必须用极端方式缓解", "reverse": false},
+        {"id": 16, "text": "压力下会出现短暂妄想或解离症状", "reverse": false}
+      ]
+    },
+    {
+      "code": "ASPD",
+      "name": "反社会型特质",
+      "core_features": ["漠视规则", "缺乏悔意", "攻击性"],
+      "clinical_threshold": 3.5,
+      "questions": [
+        {"id": 17, "text": "为达目的可以轻易说谎而毫无愧疚", "reverse": false},
+        {"id": 18, "text": "伤害他人后我主要考虑如何避免后果", "reverse": false},
+        {"id": 19, "text": "违法犯罪行为对我有特殊吸引力", "reverse": false},
+        {"id": 20, "text": "我享受在智力或体力上碾压对手", "reverse": false},
+        {"id": 21, "text": "长期责任（如工作/育儿）让我极度烦躁", "reverse": false},
+        {"id": 22, "text": "危险行为（如斗殴/极限运动）让我兴奋", "reverse": false},
+        {"id": 23, "text": "我通过操纵他人情感获取所需", "reverse": false},
+        {"id": 24, "text": "童年时期就有虐待动物/纵火等行为", "reverse": false}
+      ]
+    },
+    {
+      "code": "NPD",
+      "name": "自恋型特质",
+      "core_features": ["夸大自我", "特权感", "共情缺乏"],
+      "clinical_threshold": 3.7,
+      "questions": [
+        {"id": 25, "text": "我理应获得特殊待遇，普通规则不适用于我", "reverse": false},
+        {"id": 26, "text": "当他人谈论其痛苦时，我很难真正理解", "reverse": false},
+        {"id": 27, "text": "我常幻想自己获得无限权力/美貌/成功", "reverse": false},
+        {"id": 28, "text": "只有极少数"杰出人士"才配得上与我交往", "reverse": false},
+        {"id": 29, "text": "他人的批评会让我愤怒，即使对方有理", "reverse": false},
+        {"id": 30, "text": "我利用他人才能达成目标而不觉有愧", "reverse": false},
+        {"id": 31, "text": "当不是关注焦点时，我会刻意打断或离场", "reverse": false},
+        {"id": 32, "text": "我的成就常被低估，这让我愤懑不平", "reverse": false}
+      ]
+    },
+    {
+      "code": "AvPD",
+      "name": "回避型特质",
+      "core_features": ["社交抑制", "能力不足感", "过度敏感"],
+      "clinical_threshold": 3.6,
+      "questions": [
+        {"id": 33, "text": "因害怕出丑，我会拒绝所有演讲机会", "reverse": false},
+        {"id": 34, "text": "我确信自己在社交场合必然表现尴尬", "reverse": false},
+        {"id": 35, "text": "除非确定会被喜欢，否则绝不主动接触", "reverse": false},
+        {"id": 36, "text": "他人细微的表情变化会让我恐慌", "reverse": false},
+        {"id": 37, "text": "我避免任何可能被评价的工作任务", "reverse": false},
+        {"id": 38, "text": "在亲密关系中也不敢表达真实需求", "reverse": false},
+        {"id": 39, "text": "我认为自己从根本上缺乏吸引力", "reverse": false},
+        {"id": 40, "text": "独处虽孤独但比承受拒绝风险更安全", "reverse": false}
+      ]
+    },
+    {
+      "code": "DPD",
+      "name": "依赖型特质",
+      "core_features": ["过度依附", "服从行为", "分离焦虑"],
+      "clinical_threshold": 3.9,
+      "questions": [
+        {"id": 41, "text": "每天需要多次确认伴侣行踪才能安心", "reverse": false},
+        {"id": 42, "text": "我无法独自决定午餐吃什么", "reverse": false},
+        {"id": 43, "text": "会忍受虐待性关系以避免独处", "reverse": false},
+        {"id": 44, "text": "当独处超过3小时就感到强烈恐慌", "reverse": false},
+        {"id": 45, "text": "我需要他人为我承担生活责任（如理财/就医）", "reverse": false},
+        {"id": 46, "text": "为维持关系我会做违背价值观的事", "reverse": false},
+        {"id": 47, "text": "常幻想有全能保护者接管我的人生", "reverse": false},
+        {"id": 48, "text": "若被批评，会立刻彻底改变自己", "reverse": false}
+      ]
+    },
+    {
+      "code": "OCPD",
+      "name": "强迫型特质",
+      "core_features": ["完美主义", "控制需求", "情感压抑"],
+      "clinical_threshold": 3.5,
+      "questions": [
+        {"id": 49, "text": "因追求完美导致项目无法按时完成", "reverse": false},
+        {"id": 50, "text": "我必须完全按自定流程工作，否则焦虑", "reverse": false},
+        {"id": 51, "text": "丢弃无用物品会引发生理不适", "reverse": false},
+        {"id": 52, "text": "道德标准严苛到影响正常社交", "reverse": false},
+        {"id": 53, "text": "休闲娱乐会让我产生罪恶感", "reverse": false},
+        {"id": 54, "text": "他人不遵守我的规则就是不负责任", "reverse": false},
+        {"id": 55, "text": "情感表达会削弱我的理性判断", "reverse": false},
+        {"id": 56, "text": "工作效率比人际关系更重要", "reverse": false}
+      ]
+    },
+    {
+      "code": "SzPD",
+      "name": "分裂样特质",
+      "core_features": ["社交疏离", "情感局限", "独处偏好"],
+      "clinical_threshold": 3.3,
+      "questions": [
+        {"id": 57, "text": "性体验对我毫无吸引力", "reverse": false},
+        {"id": 58, "text": "观察人类互动像研究外星生物", "reverse": false},
+        {"id": 59, "text": "家人哭泣时我只感到困惑而非同情", "reverse": false},
+        {"id": 60, "text": "独自在荒野生活对我很有吸引力", "reverse": false},
+        {"id": 61, "text": "我记不住他人的面部特征", "reverse": false},
+        {"id": 62, "text": "节日聚会是被迫忍受的仪式", "reverse": false},
+        {"id": 63, "text": "我的兴趣爱好完全不需要他人参与", "reverse": false},
+        {"id": 64, "text": "被触摸（如握手）会让我不适", "reverse": false}
+      ]
+    },
+    {
+      "code": "HPD",
+      "name": "表演型特质",
+      "core_features": ["过度情绪化", "寻求注意", "易受暗示"],
+      "clinical_threshold": 3.4,
+      "questions": [
+        {"id": 65, "text": "我会夸大身体不适以获得关注", "reverse": false},
+        {"id": 66, "text": "当不是关注焦点时会故意制造戏剧", "reverse": false},
+        {"id": 67, "text": "我的观点常随谈话对象改变", "reverse": false},
+        {"id": 68, "text": "用夸张肢体语言吸引他人注意", "reverse": false},
+        {"id": 69, "text": "认为自己在任何聚会都该是主角", "reverse": false},
+        {"id": 70, "text": "快速切换热烈崇拜和激烈谴责", "reverse": false},
+        {"id": 71, "text": "衣着打扮主要为引发他人反应", "reverse": false},
+        {"id": 72, "text": "关系深度常被我高估（称陌生人为'灵魂伴侣'）", "reverse": false}
+      ]
+    },
+    {
+      "code": "StPD",
+      "name": "分裂型特质",
+      "core_features": ["古怪信念", "不寻常体验", "关系焦虑"],
+      "clinical_threshold": 3.7,
+      "questions": [
+        {"id": 73, "text": "我相信自己有未开发的超自然能力", "reverse": false},
+        {"id": 74, "text": "数字/颜色有特定神秘含义", "reverse": false},
+        {"id": 75, "text": "常感觉被无形存在注视", "reverse": false},
+        {"id": 76, "text": "我的言语模式常让他人困惑", "reverse": false},
+        {"id": 77, "text": "社交场合会使用特殊仪式缓解焦虑", "reverse": false},
+        {"id": 78, "text": "幻觉体验比现实更真实", "reverse": false},
+        {"id": 79, "text": "怀疑他人能读取我的思想", "reverse": false},
+        {"id": 80, "text": "迷信行为严重影响日常生活", "reverse": false}
+      ]
+    }
+  ],
+  "scoring": {
+    "algorithm": "维度均分 = sum(题目得分)/题目数",
+    "interpretation": [
+      {"range": [1.0, 2.4], "label": "正常范围", "action": "无需特别关注"},
+      {"range": [2.5, 3.4], "label": "亚临床倾向", "action": "建议自我观察"},
+      {"range": [3.5, 4.4], "label": "临床关注级", "action": "推荐专业评估"},
+      {"range": [4.5, 5.0], "label": "急需干预", "action": "立即寻求帮助"}
+    ],
+    "comorbidity_note": "若≥3个维度＞3.5分，可能存在共病人格障碍"
+  },
+  "post_test": {
+    "visualization": "十维雷达图+柱状图对比常模",
+    "narrative_template": [
+      "您的{维度名}得分为{分数}，表现为{核心特征}。",
+      "{临床建议}",
+      "{应对策略}"
+    ],
+    "clinical_resources": [
+      {
+        "type": "危机干预",
+        "items": ["全国心理援助热线：12320", "北京回龙观医院心理危机干预中心"]
+      },
+      {
+        "type": "专业评估",
+        "items": ["中国心理学会注册系统查询", "三甲医院精神科门诊"]
+      }
+    ],
+    "self_reflection": [
+      "哪些结果让您感到意外？为什么？",
+      "这些特质在什么情境下对您最有帮助/最造成困扰？",
+      "您希望优先改善哪个领域的功能？"
+    ]
+  }
+}
