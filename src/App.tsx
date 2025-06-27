@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { AlertTriangle, Clock, Shield, Phone, BookOpen, Download, ArrowLeft, CheckCircle, Brain, Users, Heart, AlertCircle, Share2, FileText, Camera, Home, ArrowRight, Star, Zap } from 'lucide-react';
+import { AlertTriangle, Clock, Shield, Phone, BookOpen, Download, ArrowLeft, CheckCircle, Brain, Users, Heart, AlertCircle, Share2, FileText, Camera, Home, ArrowRight, Star, Zap, Github, Globe, MessageCircle } from 'lucide-react';
+
+// 获取当前日期函数
+const getCurrentDate = () => {
+  const date = new Date();
+  return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')}`;
+};
 
 // 简单版20题测试数据
 const simpleTestData = {
@@ -411,94 +417,135 @@ function App() {
   };
 
   const getDetailedInterpretation = (dimensionKey: string, score: number, threshold: number) => {
-    const interpretations: any = {
-      // 简单版解释
-      cluster_a: {
-        high: "您在奇异、偏执或退缩行为方面表现出显著特征。建议关注人际信任建立和现实检验能力，必要时寻求心理健康服务支持。",
-        medium: "您在某些社交情境中可能表现出谨慎或独特的思维方式，这在适度范围内可能是个人风格的体现。",
-        low: "您在人际交往和现实感知方面表现良好，具有基本的社交适应能力。",
-        normal: "您在社交认知和人际信任方面表现正常，具有健康的边界意识。"
-      },
-      cluster_b: {
-        high: "您在情绪调节和冲动控制方面面临显著挑战。强烈建议学习情绪管理技巧，寻求心理健康服务支持。",
-        medium: "您在情绪表达和人际关系方面有一定波动，建议关注情绪调节和人际技能发展。",
-        low: "您的情绪表达相对稳定，具有基本的冲动控制能力。",
-        normal: "您具有良好的情绪调节能力和稳定的人际关系模式。"
-      },
-      cluster_c: {
-        high: "您在焦虑和回避行为方面表现显著。建议从低风险活动开始，逐步建立自信，考虑焦虑管理训练。",
-        medium: "您在某些情况下可能表现出谨慎或依赖倾向，这在适度范围内是正常的适应反应。",
-        low: "您具有基本的独立能力和社交自信，能够适度应对挑战。",
-        normal: "您在独立性和社交适应方面保持良好平衡。"
-      },
-      // 完整版解释
+    const traitData: any = {
       paranoid: {
-        high: "您在人际信任和猜疑方面表现出显著特征。建议学习认知重构技巧，区分合理警觉与过度猜疑，考虑寻求认知行为治疗支持。",
-        medium: "您具有适度的人际警觉性，在某些情况下这可能是保护性的。注意避免过度解读他人行为。",
-        low: "您在人际信任方面表现良好，能够建立相对稳定的信任关系。",
-        normal: "您在人际信任方面表现正常，具有健康的边界意识。"
-      },
-      schizoid: {
-        high: "您表现出明显的社交疏离倾向。这种特质本身并非病理性，但如影响生活功能，建议探索社交技能训练。",
-        medium: "您在独处与社交间有自己的平衡方式，这是个人风格的体现。",
-        low: "您能够适度享受独处时光，同时维持必要的社交联系。",
-        normal: "您在社交需求方面表现平衡，能够灵活调节独处与社交的比例。"
-      },
-      schizotypal: {
-        high: "您在认知和感知方面可能有独特体验。建议关注现实检验能力，必要时寻求评估以排除其他可能。",
-        medium: "您具有一定的创造性思维，注意保持与现实的良好连接。",
-        low: "您的思维方式相对常规，具有良好的现实感。",
-        normal: "您的认知和感知功能在正常范围内，现实检验能力良好。"
-      },
-      antisocial: {
-        high: "您在社会规范遵循方面表现出显著困难。强烈建议寻求心理干预，学习冲动控制和共情技能。",
-        medium: "您在规则遵循方面有一定灵活性，注意考虑行为的社会后果。",
-        low: "您基本能够遵循社会规范，偶有冲动行为属正常范围。",
-        normal: "您很好地遵循社会规范，具有良好的道德判断能力。"
+        name: "偏执型特质",
+        description: "以普遍性不信任和怀疑为特征，倾向于将他人的动机解释为恶意。临床表现为过度警惕、敌意归因和长期戒备状态。",
+        coreFeatures: "警觉性 · 风险预判 · 防御机制",
+        lowScore: "您的审慎在安全敏感岗位（如金融审计）具有优势，类似FBI反欺诈专家怀特·赫兹菲尔德的工作方式。",
+        highScore: "当产生持续性被害妄想时，推荐认知重构技术："证据检验表"（记录支持/反对怀疑的客观事实）。",
+        balanceTip: "信任如眼睛，既需保护也需睁开。"
       },
       borderline: {
-        high: "您在情绪调节和人际关系方面面临显著挑战。强烈建议寻求辩证行为疗法(DBT)等治疗支持。",
-        medium: "您在情绪和关系方面有一定波动，建议学习情绪调节技巧和人际效能技能。",
-        low: "您的情绪和人际关系相对稳定，偶有波动属正常范围。",
-        normal: "您具有良好的情绪调节能力和稳定的人际关系模式。"
+        name: "边缘型特质",
+        description: "表现为人际关系、自我形象和情感的不稳定，伴有显著冲动行为。核心挑战是强烈的被遗弃恐惧和情绪失调。",
+        coreFeatures: "情感强烈 · 关系敏感 · 身份波动",
+        lowScore: "您的共情深度在创伤咨询领域价值非凡，如心理学家玛莎·林娜翰创立辩证行为疗法的经历。",
+        highScore: "当出现自伤冲动时，立即使用"TIPP技术"：冰水敷脸→高强度运动→ paced breathing→渐进肌肉放松。",
+        balanceTip: "情绪如河流，疏浚比堵截更重要。"
       },
-      histrionic: {
-        high: "您具有强烈的表现欲和情感表达特征。建议学习更深层的情感体验和表达方式。",
-        medium: "您具有良好的表达能力和社交魅力，注意保持情感表达的真实性。",
-        low: "您的情感表达相对内敛，这是个人风格的体现。",
-        normal: "您的情感表达方式平衡适度，能够根据情境调节表达强度。"
+      antisocial: {
+        name: "反社会型特质",
+        description: "持续漠视并侵犯他人权利，缺乏悔恨感。表现为欺骗性、冲动性和攻击性行为模式，常始于15岁前。",
+        coreFeatures: "规则挑战 · 目标优先 · 低共情",
+        lowScore: "您的危机决策力在急诊外科等高压领域至关重要，仿若战地医生大卫·纳瓦的战场救援。",
+        highScore: "当出现伤害倾向时，"后果推演"训练：预判行为对自身/他人/社会的三重影响链。",
+        balanceTip: "自由如飞鸟，认清领空方得翱翔。"
       },
       narcissistic: {
-        high: "您在自我评价和共情能力方面表现出显著特征。建议培养真实的自我认知和他人视角理解能力。",
-        medium: "您具有一定的自信心，注意平衡自我关注与他人需求。",
-        low: "您的自我评价相对客观，具有适度的自信心。",
-        normal: "您具有健康的自尊水平和良好的共情能力。"
+        name: "自恋型特质",
+        description: "需要他人钦佩的普遍模式，具有夸大、特权感和共情缺乏特征。存在显性（外显傲慢）与隐性（脆弱敏感）亚型。",
+        coreFeatures: "自我专注 · 成就驱动 · 认可需求",
+        lowScore: "您的领导魄力在创业初期具有决定性作用，如史蒂夫·乔布斯重塑科技行业的自信。",
+        highScore: "当遭遇"自恋损伤"时，尝试"匿名贡献法"：完成三次不公开的利他行为。",
+        balanceTip: "自信如古树，根系深扎才经风雨。"
       },
       avoidant: {
-        high: "您在社交回避方面表现显著。建议从低风险社交开始，逐步建立自信，考虑社交焦虑治疗。",
-        medium: "您在社交方面有一定谨慎性，这在某些情况下是适应性的。",
-        low: "您能够适度参与社交活动，具有基本的社交自信。",
-        normal: "您具有良好的社交适应能力，能够灵活应对各种社交情境。"
+        name: "回避型特质",
+        description: "因害怕批评、否定或排斥而回避人际接触，伴有能力不足感和过度敏感。社会隔离常导致抑郁共病。",
+        coreFeatures: "评价恐惧 · 社交抑制 · 安全优先",
+        lowScore: "您的深度思考在理论研究领域优势显著，如数学家佩雷尔曼破解庞加莱猜想的孤独征程。",
+        highScore: "当回避行为影响职业发展时，实施"梯度暴露"：从文字交流→语音留言→视频通话→短暂会面的渐进练习。",
+        balanceTip: "安全区如温室，适度通风方能茁壮。"
       },
       dependent: {
-        high: "您在独立性方面面临显著挑战。建议逐步培养自主决策能力和自我效能感。",
-        medium: "您在依赖与独立间寻求平衡，这是人际关系的正常需求。",
-        low: "您具有基本的独立能力，能够在需要时寻求适当支持。",
-        normal: "您在独立性和相互依赖间保持良好平衡。"
+        name: "依赖型特质",
+        description: "过度需要被照顾导致顺从和依附行为，伴有分离恐惧。决策困难、自我贬低和耐受虐待是典型表现。",
+        coreFeatures: "依附行为 · 决策焦虑 · 取悦倾向",
+        lowScore: "您的支持能力在护理教育领域极为珍贵，如弗洛伦斯·南丁格尔创建现代护理体系时的协作精神。",
+        highScore: "当产生病理性依赖时，进行"自主训练"：每日完成3件独立决定的小事（如选择午餐）。",
+        balanceTip: "依赖如藤蔓，自有主干方成林。"
       },
       obsessive: {
-        high: "您的完美主义和控制倾向较为显著。建议学习灵活性思维，接受'足够好'的标准。",
-        medium: "您具有良好的组织能力和责任心，注意避免过度完美主义。",
-        low: "您的做事风格相对灵活，能够适应变化。",
-        normal: "您在条理性和灵活性间保持良好平衡。"
+        name: "强迫型特质",
+        description: "执着于秩序、完美控制和规则，牺牲灵活性、开放性和效率。常伴有过度谨慎和道德僵化。",
+        coreFeatures: "秩序需求 · 完美主义 · 控制执着",
+        lowScore: "您的精密思维在航天工程等关键领域不可或缺，如同NASA工程师应对阿波罗13号危机的严谨。",
+        highScore: "当完美主义导致瘫痪时，采用"80/20法则"：用20%精力达成80%效果，剩余时间迭代优化。",
+        balanceTip: "精准如瑞士表，定期校时更可靠。"
+      },
+      schizoid: {
+        name: "分裂样特质",
+        description: "社交关系脱离和情感表达范围受限的普遍模式。表现为独处偏好、情感淡漠和快感缺乏，非精神病性障碍。",
+        coreFeatures: "情感局限 · 独处偏好 · 低社交需求",
+        lowScore: "您的专注力在基础科研领域价值非凡，如居里夫人四年如一日提炼镭的坚持。",
+        highScore: "当疏离影响必要联结时，尝试"定向社交"：每月参加1次兴趣小组（如天文观测俱乐部）。",
+        balanceTip: "孤独如深海，声呐联络可探新境。"
+      },
+      histrionic: {
+        name: "表演型特质",
+        description: "过度情绪化和寻求注意的普遍模式。表现为戏剧化表达、易受暗示和用外表吸引关注等特征。",
+        coreFeatures: "情感夸张 · 焦点需求 · 易受暗示",
+        lowScore: "您的表现力在舞台艺术领域独具优势，如莎拉·伯恩哈特革新戏剧表演的感染力。",
+        highScore: "当出现病态求关注行为时，实践"观众筛选"：只为值得的人展现才华（如真实欣赏者）。",
+        balanceTip: "表现如彩虹，需有雨露方显形。"
+      },
+      schizotypal: {
+        name: "分裂型特质",
+        description: "社交和人际关系缺陷，伴有认知或知觉扭曲及行为怪异。存在牵连观念、古怪信念和不寻常知觉体验。",
+        coreFeatures: "古怪信念 · 知觉异常 · 关系焦虑",
+        lowScore: "您的非常规思维在艺术创新中极具价值，如达利超现实主义画作开启的新维度。",
+        highScore: "当现实检验受损时，使用"三重验证法"：记录事件→寻找物理证据→咨询可信者意见。",
+        balanceTip: "想象如星轨，锚定大地观天文。"
+      },
+      // 简单版的三大类群
+      cluster_a: {
+        name: "A型人格特质群",
+        description: "包含偏执型、分裂样型和分裂型特质，以奇异、偏执或退缩行为为特征。",
+        coreFeatures: "警觉性 · 关系距离 · 认知特异",
+        lowScore: "您的独特思维方式在创造性领域具有潜在优势，能从不同角度看待问题。",
+        highScore: "注意培养现实检验能力，尝试多元信息验证法：至少从三个独立渠道确认重要信息。",
+        balanceTip: "特立独行固然可贵，与世界保持联结更为重要。"
+      },
+      cluster_b: {
+        name: "B型人格特质群",
+        description: "包含反社会型、边缘型、自恋型和表演型特质，以情绪不稳、冲动和戏剧化行为为特征。",
+        coreFeatures: "情感强度 · 关系波动 · 行为张力",
+        lowScore: "您的情感丰富度和表现力在人际交往和创造性工作中具有独特价值。",
+        highScore: "尝试ABC情绪管理法：识别事件(A)→觉察信念(B)→关注后果(C)，建立情绪-思维-行为连接。",
+        balanceTip: "情感如火，既能照亮也能燃烧，掌握调节是关键。"
+      },
+      cluster_c: {
+        name: "C型人格特质群", 
+        description: "包含回避型、依赖型和强迫型特质，以焦虑、恐惧和过度控制行为为特征。",
+        coreFeatures: "安全需求 · 秩序执着 · 不确定性焦虑",
+        lowScore: "您的谨慎性和细节关注在需要精确和稳定的工作中具有显著优势。",
+        highScore: "尝试"不确定性耐受训练"：每周尝试一件小事的新方法，逐步提高舒适区弹性。",
+        balanceTip: "安全感既来自稳固的堡垒，也来自适应变化的能力。"
       }
     };
 
-    const level = score >= threshold ? 'high' : 
-                  score >= threshold - 0.5 ? 'medium' : 
-                  score >= 2.0 ? 'low' : 'normal';
+    // 检查是否存在该维度的数据
+    if (!traitData[dimensionKey]) {
+      return "未能找到该维度的详细解释。";
+    }
+
+    const trait = traitData[dimensionKey];
+    const isHighScore = score >= threshold;
     
-    return interpretations[dimensionKey]?.[level] || "需要评估以获得更准确的解释。";
+    // 构建更详细的解释
+    return `
+<span class="font-bold">${trait.name}</span>
+
+<span class="text-gray-600">${trait.description}</span>
+
+<span class="font-semibold mt-3">核心特征：</span> ${trait.coreFeatures}
+
+<span class="font-semibold mt-3">您的表现：</span>
+${isHighScore ? `<span class="text-red-700">≥${threshold}分：</span> ${trait.highScore}` : `<span class="text-green-700"><${threshold}分：</span> ${trait.lowScore}`}
+
+<span class="font-semibold mt-3">平衡提示：</span> ${trait.balanceTip}
+`;
   };
 
   const formatTime = (seconds: number) => {
@@ -883,6 +930,53 @@ ${Object.entries(results).map(([key, data]) =>
                 </button>
               </p>
             </div>
+            
+            {/* 开发者信息 */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-sm border border-white/20 max-w-md mx-auto mt-8">
+              <div className="text-sm text-gray-600 mb-3 text-center">
+                当前版本 v1.0.1（{getCurrentDate()}）
+              </div>
+              <div className="flex items-center justify-center gap-6 text-sm">
+                <a 
+                  href="https://github.com/forsakens0ul" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-200"
+                >
+                  <Github className="w-4 h-4" />
+                  GitHub主页
+                </a>
+                <span className="text-gray-400">by</span>
+                <a 
+                  href="https://www.chalice.lol/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-200"
+                >
+                  <Globe className="w-4 h-4" />
+                  forsakensoul
+                </a>
+                <div className="relative group">
+                  <div className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-200 cursor-pointer">
+                    <MessageCircle className="w-4 h-4" />
+                    公众号
+                  </div>
+                  {/* QR Code Tooltip */}
+                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10">
+                    <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-3">
+                      <div className="text-xs text-gray-600 mb-2 text-center whitespace-nowrap">扫码关注公众号</div>
+                      <img 
+                        src="/data/wechatQR.jpg" 
+                        alt="微信公众号二维码" 
+                        className="w-24 h-24 object-contain"
+                      />
+                    </div>
+                    {/* Arrow */}
+                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -989,6 +1083,53 @@ ${Object.entries(results).map(([key, data]) =>
               <p className="text-gray-500 text-sm mt-4">
                 点击开始即表示您同意上述说明并确认符合测试条件
               </p>
+            </div>
+            
+            {/* 开发者信息 */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-sm border border-white/20 max-w-md mx-auto mt-8">
+              <div className="text-sm text-gray-600 mb-3 text-center">
+                当前版本 v1.0.1（{getCurrentDate()}）
+              </div>
+              <div className="flex items-center justify-center gap-6 text-sm">
+                <a 
+                  href="https://github.com/forsakens0ul" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-200"
+                >
+                  <Github className="w-4 h-4" />
+                  GitHub主页
+                </a>
+                <span className="text-gray-400">by</span>
+                <a 
+                  href="https://www.chalice.lol/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-200"
+                >
+                  <Globe className="w-4 h-4" />
+                  forsakensoul
+                </a>
+                <div className="relative group">
+                  <div className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-200 cursor-pointer">
+                    <MessageCircle className="w-4 h-4" />
+                    公众号
+                  </div>
+                  {/* QR Code Tooltip */}
+                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10">
+                    <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-3">
+                      <div className="text-xs text-gray-600 mb-2 text-center whitespace-nowrap">扫码关注公众号</div>
+                      <img 
+                        src="/data/wechatQR.jpg" 
+                        alt="微信公众号二维码" 
+                        className="w-24 h-24 object-contain"
+                      />
+                    </div>
+                    {/* Arrow */}
+                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white"></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1148,6 +1289,53 @@ ${Object.entries(results).map(([key, data]) =>
               <span>完成时间: {formatTime(timeSpent)}</span>
               <span>平均答题时间: {averageTime.toFixed(1)}秒/题</span>
               <span>评估维度: {Object.keys(testData.dimensions).length}项</span>
+            </div>
+          </div>
+
+          {/* 开发者信息 */}
+          <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-sm border border-white/20 max-w-md mx-auto mb-12">
+            <div className="text-sm text-gray-600 mb-3 text-center">
+              当前版本 v1.0.1（{getCurrentDate()}）
+            </div>
+            <div className="flex items-center justify-center gap-6 text-sm">
+              <a 
+                href="https://github.com/forsakens0ul" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-200"
+              >
+                <Github className="w-4 h-4" />
+                GitHub主页
+              </a>
+              <span className="text-gray-400">by</span>
+              <a 
+                href="https://www.chalice.lol/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-200"
+              >
+                <Globe className="w-4 h-4" />
+                forsakensoul
+              </a>
+              <div className="relative group">
+                <div className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-200 cursor-pointer">
+                  <MessageCircle className="w-4 h-4" />
+                  公众号
+                </div>
+                {/* QR Code Tooltip */}
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10">
+                  <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-3">
+                    <div className="text-xs text-gray-600 mb-2 text-center whitespace-nowrap">扫码关注公众号</div>
+                    <img 
+                      src="/data/wechatQR.jpg" 
+                      alt="微信公众号二维码" 
+                      className="w-24 h-24 object-contain"
+                    />
+                  </div>
+                  {/* Arrow */}
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white"></div>
+                </div>
+              </div>
             </div>
           </div>
 
