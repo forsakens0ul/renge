@@ -519,21 +519,139 @@ function App() {
 
     // 构建更详细的解释
     return `
-<span class="font-bold">${trait.name}</span>
-
-<span class="text-gray-600">${trait.description}</span>
-
-<span class="font-semibold mt-3">核心特征：</span> ${trait.coreFeatures}
-
-<span class="font-semibold mt-3">您的表现：</span>
-${
-  isHighScore
-    ? `<span class="text-red-700">≥${threshold}分：</span> ${trait.highScore}`
-    : `<span class="text-green-700"><${threshold}分：</span> ${trait.lowScore}`
-}
-
-<span class="font-semibold mt-3">平衡提示：</span> ${trait.balanceTip}
+<div class="space-y-3">
+  <div class="mb-2">
+    <h4 class="font-bold text-lg mb-1">${trait.name}</h4>
+    <p class="text-gray-600 text-sm">${trait.description}</p>
+  </div>
+  
+  <div class="bg-gray-50 p-3 rounded-lg">
+    <div class="flex items-center mb-2">
+      <div class="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+      <span class="font-semibold text-gray-800">核心特征</span>
+    </div>
+    <p class="text-gray-700 pl-4">${trait.coreFeatures}</p>
+  </div>
+  
+  <div class="bg-gray-50 p-3 rounded-lg">
+    <div class="flex items-center mb-2">
+      <div class="w-2 h-2 ${
+        isHighScore ? "bg-red-500" : "bg-green-500"
+      } rounded-full mr-2"></div>
+      <span class="font-semibold text-gray-800">您的表现</span>
+    </div>
+    <p class="text-gray-700 pl-4">
+      ${
+        isHighScore
+          ? `<span class="text-red-700 font-semibold">≥${threshold}分：</span> ${trait.highScore}`
+          : `<span class="text-green-700 font-semibold"><${threshold}分：</span> ${trait.lowScore}`
+      }
+    </p>
+  </div>
+  
+  <div class="bg-gray-50 p-3 rounded-lg">
+    <div class="flex items-center mb-2">
+      <div class="w-2 h-2 bg-amber-500 rounded-full mr-2"></div>
+      <span class="font-semibold text-gray-800">平衡提示</span>
+    </div>
+    <p class="text-gray-700 pl-4">${trait.balanceTip}</p>
+  </div>
+</div>
 `;
+  };
+
+  // 特质解读建议
+  const getTraitInterpretation = (
+    dimensionKey: string,
+    score: number,
+    threshold: number
+  ) => {
+    const interpretations: { [key: string]: { [key: string]: string } } = {
+      paranoid: {
+        high: "您在人际信任和猜疑方面表现出显著特征。建议学习认知重构技巧，区分合理警觉与过度猜疑，考虑寻求认知行为治疗支持。",
+        medium:
+          "您具有适度的人际警觉性，在某些情况下这可能是保护性的。注意避免过度解读他人行为。",
+        low: "您在人际信任方面表现良好，能够建立相对稳定的信任关系。",
+        normal: "您在人际信任方面表现正常，具有健康的边界意识。",
+      },
+      schizoid: {
+        high: "您表现出明显的社交疏离倾向。这种特质本身并非病理性，但如影响生活功能，建议探索社交技能训练。",
+        medium: "您在独处与社交间有自己的平衡方式，这是个人风格的体现。",
+        low: "您能够适度享受独处时光，同时维持必要的社交联系。",
+        normal: "您在社交需求方面表现平衡，能够灵活调节独处与社交的比例。",
+      },
+      schizotypal: {
+        high: "您在认知和感知方面可能有独特体验。建议关注现实检验能力，必要时寻求专业评估以排除其他可能。",
+        medium: "您具有一定的创造性思维，注意保持与现实的良好连接。",
+        low: "您的思维方式相对常规，具有良好的现实感。",
+        normal: "您的认知和感知功能在正常范围内，现实检验能力良好。",
+      },
+      antisocial: {
+        high: "您在社会规范遵循方面表现出显著困难。强烈建议寻求专业心理干预，学习冲动控制和共情技能。",
+        medium: "您在规则遵循方面有一定灵活性，注意考虑行为的社会后果。",
+        low: "您基本能够遵循社会规范，偶有冲动行为属正常范围。",
+        normal: "您很好地遵循社会规范，具有良好的道德判断能力。",
+      },
+      borderline: {
+        high: "您在情绪调节和人际关系方面面临显著挑战。强烈建议寻求辩证行为疗法(DBT)等专业治疗支持。",
+        medium:
+          "您在情绪和关系方面有一定波动，建议学习情绪调节技巧和人际效能技能。",
+        low: "您的情绪和人际关系相对稳定，偶有波动属正常范围。",
+        normal: "您具有良好的情绪调节能力和稳定的人际关系模式。",
+      },
+      histrionic: {
+        high: "您具有强烈的表现欲和情感表达特征。建议学习更深层的情感体验和表达方式。",
+        medium: "您具有良好的表达能力和社交魅力，注意保持情感表达的真实性。",
+        low: "您的情感表达相对内敛，这是个人风格的体现。",
+        normal: "您的情感表达方式平衡适度，能够根据情境调节表达强度。",
+      },
+      narcissistic: {
+        high: "您在自我评价和共情能力方面表现出显著特征。建议培养真实的自我认知和他人视角理解能力。",
+        medium: "您具有一定的自信心，注意平衡自我关注与他人需求。",
+        low: "您的自我评价相对客观，具有适度的自信心。",
+        normal: "您具有健康的自尊水平和良好的共情能力。",
+      },
+      avoidant: {
+        high: "您在社交回避方面表现显著。建议从低风险社交开始，逐步建立自信，考虑社交焦虑治疗。",
+        medium: "您在社交方面有一定谨慎性，这在某些情况下是适应性的。",
+        low: "您能够适度参与社交活动，具有基本的社交自信。",
+        normal: "您具有良好的社交适应能力，能够灵活应对各种社交情境。",
+      },
+      dependent: {
+        high: "您在独立性方面面临显著挑战。建议逐步培养自主决策能力和自我效能感。",
+        medium: "您在依赖与独立间寻求平衡，这是人际关系的正常需求。",
+        low: "您具有基本的独立能力，能够在需要时寻求适当支持。",
+        normal: "您在独立性和相互依赖间保持良好平衡。",
+      },
+      obsessive: {
+        high: "您的完美主义和控制倾向较为显著。建议学习灵活性思维，接受'足够好'的标准。",
+        medium: "您具有良好的组织能力和责任心，注意避免过度完美主义。",
+        low: "您的做事风格相对灵活，能够适应变化。",
+        normal: "您在条理性和灵活性间保持良好平衡。",
+      },
+    };
+
+    // 根据分数确定等级
+    let level: string;
+    if (score >= threshold) {
+      level = "high";
+    } else if (score >= threshold - 0.5) {
+      level = "medium";
+    } else if (score >= 2.0) {
+      level = "low";
+    } else {
+      level = "normal";
+    }
+
+    // 如果找不到对应的维度或等级，返回一般性建议
+    if (
+      !interpretations[dimensionKey] ||
+      !interpretations[dimensionKey][level]
+    ) {
+      return "建议保持身心健康，定期复查自我评估。";
+    }
+
+    return interpretations[dimensionKey][level];
   };
 
   const formatTime = (seconds: number) => {
@@ -1560,13 +1678,25 @@ ${Object.entries(results)
                     </div>
                     {selectedDimension === key && (
                       <div className="mt-4 p-4 bg-white rounded-lg border border-gray-200">
-                        <p className="text-gray-700 text-sm leading-relaxed">
-                          {getDetailedInterpretation(
-                            key,
-                            data.score,
-                            data.threshold
-                          )}
-                        </p>
+                        <div className="space-y-4">
+                          <p className="text-gray-700 text-sm leading-relaxed border-l-4 border-blue-400 pl-3 py-1 bg-blue-50 rounded-r-md">
+                            {getTraitInterpretation(
+                              key,
+                              data.score,
+                              data.threshold
+                            )}
+                          </p>
+                          <div
+                            className="text-gray-700 text-sm leading-relaxed"
+                            dangerouslySetInnerHTML={{
+                              __html: getDetailedInterpretation(
+                                key,
+                                data.score,
+                                data.threshold
+                              ),
+                            }}
+                          ></div>
+                        </div>
                       </div>
                     )}
                   </div>
@@ -1602,13 +1732,25 @@ ${Object.entries(results)
                           {data.score.toFixed(2)}/5.0
                         </span>
                       </h4>
-                      <p className="text-gray-700 text-sm leading-relaxed">
-                        {getDetailedInterpretation(
-                          key,
-                          data.score,
-                          data.threshold
-                        )}
-                      </p>
+                      <div className="space-y-4">
+                        <p className="text-gray-700 text-sm leading-relaxed border-l-4 border-blue-400 pl-3 py-1 bg-blue-50 rounded-r-md">
+                          {getTraitInterpretation(
+                            key,
+                            data.score,
+                            data.threshold
+                          )}
+                        </p>
+                        <div
+                          className="text-gray-700 text-sm leading-relaxed"
+                          dangerouslySetInnerHTML={{
+                            __html: getDetailedInterpretation(
+                              key,
+                              data.score,
+                              data.threshold
+                            ),
+                          }}
+                        ></div>
+                      </div>
                     </div>
                   ))}
               </div>
